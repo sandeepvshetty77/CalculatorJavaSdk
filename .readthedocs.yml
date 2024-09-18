@@ -7,11 +7,11 @@ version: 2
 
 # Set the OS, Python version and other tools you might need
 build:
-  os: ubuntu-20.04
   tools:
-    java: "openjdk11" 
-sphinx:
-  builder: html
+    java: 
+      version: "openjdk11" 
+# sphinx:
+#   builder: html
 
 commands:
   # Run Javadoc to regenerate docs whenever you build
