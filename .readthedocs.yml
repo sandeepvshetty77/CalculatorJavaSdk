@@ -12,7 +12,7 @@ build:
     - default-jdk
   commands:
     # Run Javadoc to regenerate docs whenever you build
-    - javadoc -d CalculatorSDK/docs/javadoc CalculatorSDK/src/**/*.java
+    - javadoc -sourcepath CalculatorSDK\src\*.java -d  CalculatorSDK\docs
 # sphinx:
 #   builder: html
 
