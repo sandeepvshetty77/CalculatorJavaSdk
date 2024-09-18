@@ -40,6 +40,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: "11"
+
+      - name: Print current directory
+        run: pwd
+
+      - name: List all files and directories
+        run: ls -la
       
       - name: Generate Javadoc
         run: |
