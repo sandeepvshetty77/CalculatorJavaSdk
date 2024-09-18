@@ -14,11 +14,12 @@ python:
   install:
     - method: "skip"
 
-# Commands to install Java and run javadoc
-commands:
-  # Install Java using apt-get
-  - apt-get update && apt-get install -y openjdk-11-jdk # Install OpenJDK 11 (adjust version if needed)
-  - javadoc -sourcepath CalculatorSDK\src\*.java -d  CalculatorSDK\docs
+# The essential step: using build.commands to install Java and run javadoc
+build:
+  commands:
+    # Install OpenJDK 11
+    - apt-get update && apt-get install -y openjdk-11-jdk
+    - javadoc -sourcepath CalculatorSDK\src\*.java -d  CalculatorSDK\docs
 # sphinx:
 #   builder: html
 
