@@ -8,6 +8,8 @@ version: 2
 # Set the java version and other tools you might need
 build:
   os: ubuntu-22.04
+  tools:
+    java: "openjdk11"
   apt_packages:
     - default-jdk
   commands:
