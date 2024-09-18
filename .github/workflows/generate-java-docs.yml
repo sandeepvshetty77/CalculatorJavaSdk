@@ -24,6 +24,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -45,12 +47,18 @@ jobs:
         run: pwd
 
       - name: List all files and directories
-        run: ls -la
+        run: ls -lrta
+        
+      - name: Print current working directory
+        run: echo "Current working directory:$GITHUB_WORKSPACE"
+
+      - name: List files and directories
+        run: ls -la $GITHUB_WORKSPACE
       
       - name: Generate Javadoc
         run: |
-          mkdir -p CalculatorSDK/docs
-          javadoc -sourcepath CalculatorSDK/src/*.java -d  CalculatorSDK/docs
+          mkdir -p $GITHUB_WORKSPACE/CalculatorSDK/docs
+          javadoc -sourcepath $GITHUB_WORKSPACE/CalculatorSDK/src/*.java -d  $GITHUB_WORKSPACE/CalculatorSDK/docs
 
       - name: Configure Git
         run: |
