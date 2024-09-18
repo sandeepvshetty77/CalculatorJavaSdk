@@ -8,12 +8,10 @@ version: 2
 # Set the java version and other tools you might need
 build:
   os: ubuntu-22.04
-  tools:
-    java: "openjdk11"
   apt_packages:
     - default-jdk
   commands:
-    # Run Javadoc to regenerate docs whenever you build
+    - apt-get update && apt-get install -y openjdk-11-jdk
     - javadoc -sourcepath CalculatorSDK\src\*.java -d  CalculatorSDK\docs
 # sphinx:
 #   builder: html
