@@ -8,10 +8,10 @@ version: 2
 # Set the java version and other tools you might need
 build:
   os: ubuntu-22.04
-  apt_packages:
-    - default-jdk
+  tools:
+    java: "11"
+
   commands:
-    - apt-get update && apt-get install -y openjdk-11-jdk
     - javadoc -sourcepath CalculatorSDK\src\*.java -d  CalculatorSDK\docs
 # sphinx:
 #   builder: html
