@@ -5,11 +5,11 @@
 # Required
 version: 2
 
-# Set the OS, Python version and other tools you might need
+# Set the java version and other tools you might need
 build:
-  tools:
-    java:
-      version: "openjdk11"
+  os: ubuntu-22.04
+  apt_packages:
+    - default-jdk
 # sphinx:
 #   builder: html
 
