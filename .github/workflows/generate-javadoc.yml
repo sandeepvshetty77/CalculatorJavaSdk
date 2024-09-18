@@ -69,4 +69,4 @@ jobs:
         run: |
           git add CalculatorSDK/docs
           git commit -m "Update Javadoc"
-          git push origin main
+          git push origin master
