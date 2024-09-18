@@ -12,11 +12,7 @@ build:
     # Install OpenJDK 11
     - apt-get update && apt-get install -y openjdk-11-jdk
     - javadoc -sourcepath CalculatorSDK\src\*.java -d  CalculatorSDK\docs
-
 # Skip Python installation since you're working with Java
-python:
-  install:
-    - method: "skip"
 # sphinx:
 #   builder: html
 
