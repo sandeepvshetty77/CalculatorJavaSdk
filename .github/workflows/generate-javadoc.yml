@@ -70,3 +70,5 @@ jobs:
           git add CalculatorSDK/docs
           git commit -m "Update Javadoc"
           git push origin master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
