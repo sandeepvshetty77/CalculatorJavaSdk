@@ -67,7 +67,7 @@ jobs:
 
       - name: Commit and Push Javadoc
         run: |
-          git add CalculatorSDK/docs
+          git add ./docs
           git commit -m "Update Javadoc"
           git push origin master
         env:
