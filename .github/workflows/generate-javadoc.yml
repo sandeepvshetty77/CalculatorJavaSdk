@@ -58,7 +58,7 @@ jobs:
       - name: Generate Javadoc
         run: |
           mkdir -p $GITHUB_WORKSPACE/CalculatorSDK/docs
-          javadoc -sourcepath $GITHUB_WORKSPACE/CalculatorSDK/src/*.java -d  $GITHUB_WORKSPACE/CalculatorSDK/docs
+          javadoc -sourcepath $GITHUB_WORKSPACE/CalculatorSDK/src/*.java -d  $GITHUB_WORKSPACE/docs
 
       - name: Configure Git
         run: |
