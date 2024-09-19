@@ -19,8 +19,8 @@ sphinx:
 #   - CalculatorSDK/docs/javadoc
 
 # Ensure that Read the Docs knows to use the docs directory as the root for static content
-html:
-  dir: CalculatorSDK/docs/javadoc # Path to where your JavaDoc HTML files are located
+# html:
+#   dir: CalculatorSDK/docs/javadoc # Path to where your JavaDoc HTML files are located
 
 # build:
 #   commands:
