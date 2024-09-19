@@ -62,8 +62,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.name "Sandeep Shetty"
-          git config --global user.email "sandeepvs@yahoo.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Commit and Push Javadoc
         run: |
