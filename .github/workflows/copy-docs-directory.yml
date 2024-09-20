@@ -18,6 +18,13 @@ jobs:
           distribution: "temurin"
           java-version: "11"
 
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          repository: sandeepvshetty77/CalculatorJavaSDK
+          path: source-repo
+
       - name: Print current directory
         run: pwd
 
@@ -42,13 +49,6 @@ jobs:
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: Checkout source repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          repository: sandeepvshetty77/CalculatorJavaSDK
-          path: source-repo
 
         # Step 2: Checkout the Destination Repository
       - name: Checkout Destination Repository
