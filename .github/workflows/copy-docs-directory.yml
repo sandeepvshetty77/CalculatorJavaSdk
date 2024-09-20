@@ -15,8 +15,8 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v2
         with:
-        repository: sandeepvshetty77/CalculatorJavaSDK
-        path: source-repo
+          repository: sandeepvshetty77/CalculatorJavaSDK
+          path: source-repo
 
         # Step 2: Checkout the Destination Repository
       - name: Checkout Destination Repository
