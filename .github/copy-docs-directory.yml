@@ -1,0 +1,52 @@
+name: Copy Directory to Another Repo
+
+on:
+  push:
+    branches:
+      - main # Trigger on push to main branch, adjust as needed
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v2
+        with:
+        repository: sandeepvshetty77/CalculatorJavaSDK
+        path: source-repo
+
+        # Step 2: Checkout the Destination Repository
+      - name: Checkout Destination Repository
+        uses: actions/checkout@v2
+        with:
+          repository: sandeepvshetty77/CalculatorJavaSDK_Destination
+          path: destination-repo
+          token: ${{ secrets.DESTINATION_REPO_TOKEN }} # Using the built-in token
+          ref: docs-branch # Checkout the specific branch
+
+      # Step 3: Copy the docs from source to destination
+      - name: Copy Documentation
+        run: |
+          # Define the source and destination directories
+          SOURCE_DIR="CalculatorSDK/docs"
+          DESTINATION_REPO="https://github.com/sandeepvshetty77/CalculatorJavaSDK_Destination.git"
+          DESTINATION_DIR="JavaSDK/docs"
+
+          # Clone the destination repository
+          # git clone $DESTINATION_REPO destination-repo
+
+          # Copy the specific directory to the destination repo
+          cp -r source-repo/$SOURCE_DIR destination-repo/$DESTINATION_DIR
+          echo "Documentation copied to destination repository."
+
+      # Step 4: Commit and push changes to the destination repository
+      - name: Commit and Push Changes
+        run: |
+          cd destination-repo
+          git config --global user.email "your-email@example.com"  # Set your email
+          git config --global user.name "GitHub Actions Bot"  # Set a name
+          git checkout -b docs-branch || git checkout docs-branch  # Create branch if it doesn't exist
+          git add JavaSDK/docs
+          git commit -m "Update documentation from CalculatorSDK"
+          git push origin docs-branch  # Push to the specific branch
