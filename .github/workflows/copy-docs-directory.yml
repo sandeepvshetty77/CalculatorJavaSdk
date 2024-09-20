@@ -44,12 +44,9 @@ jobs:
       - name: Copy Documentation
         run: |
           # Define the source and destination directories
-          SOURCE_DIR="/docs"
+          SOURCE_DIR="docs"
           DESTINATION_REPO="https://github.com/sandeepvshetty77/CalculatorJavaSDK_Destination.git"
-          DESTINATION_DIR="/docs"
-
-          # Clone the destination repository
-          # git clone $DESTINATION_REPO destination-repo
+          DESTINATION_DIR="docs"
 
           # Copy the specific directory to the destination repo
           # cp -r source-repo/$SOURCE_DIR destination-repo/$DESTINATION_DIR
