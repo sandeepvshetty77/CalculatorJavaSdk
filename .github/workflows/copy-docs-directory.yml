@@ -12,6 +12,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up JDK 11
+          uses: actions/setup-java@v4.3.0
+          with:
+            distribution: "temurin"
+            java-version: "11"
+      
+      - name: Print current directory
+        run: pwd
+
+      - name: List all files and directories
+        run: ls -lrta
+
+      - name: Print current working directory
+        run: echo "Current working directory:$GITHUB_WORKSPACE"
+
+      - name: List files and directories
+        run: ls -la $GITHUB_WORKSPACE
+
+      - name: Generate Javadoc
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/docs
+          javadoc -sourcepath $GITHUB_WORKSPACE/CalculatorSDK/src/*.java -d  $GITHUB_WORKSPACE/docs
+
+      - name: Commit and Push Javadoc
+        run: |
+          git add .
+          git commit -m "Update Javadoc1"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
       - name: Checkout source repository
         uses: actions/checkout@v4
         with:

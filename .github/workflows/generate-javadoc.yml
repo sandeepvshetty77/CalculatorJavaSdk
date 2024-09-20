@@ -55,20 +55,20 @@ jobs:
       - name: List files and directories
         run: ls -la $GITHUB_WORKSPACE
 
-      - name: Generate Javadoc
-        run: |
-          mkdir -p $GITHUB_WORKSPACE/CalculatorSDK/docs
-          javadoc -sourcepath $GITHUB_WORKSPACE/CalculatorSDK/src/*.java -d  $GITHUB_WORKSPACE/docs
+      # - name: Generate Javadoc
+      #   run: |
+      #     mkdir -p $GITHUB_WORKSPACE/CalculatorSDK/docs
+      #     javadoc -sourcepath $GITHUB_WORKSPACE/CalculatorSDK/src/*.java -d  $GITHUB_WORKSPACE/docs
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      # - name: Configure Git
+      #   run: |
+      #     git config --global user.name "GitHub Actions"
+      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Commit and Push Javadoc
-        run: |
-          git add ./docs
-          git commit -m "Update Javadoc"
-          git push origin master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      # - name: Commit and Push Javadoc
+      #   run: |
+      #     git add .
+      #     git commit -m "Update Javadoc"
+      #     git push origin master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
