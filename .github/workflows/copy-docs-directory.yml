@@ -39,8 +39,9 @@ jobs:
 
       - name: Generate Javadoc
         run: |
-          mkdir -p $GITHUB_WORKSPACE/docs
-          javadoc -sourcepath $GITHUB_WORKSPACE/CalculatorSDK/src/*.java -d  $GITHUB_WORKSPACE/docs
+          mkdir -p source-repo/docs
+          javadoc -sourcepath source-repo/CalculatorSDK/src/*.java -d  source-repo/docs
+          ls -lrta source-repo/docs
 
       - name: Commit and Push Javadoc
         run: |
