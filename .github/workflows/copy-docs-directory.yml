@@ -27,7 +27,16 @@ jobs:
           repository: sandeepvshetty77/CalculatorJavaSDK_Destination
           path: destination-repo
           token: ${{ secrets.DESTINATION_REPO_TOKEN }} # Using the built-in token
-          ref: docs-branch # Checkout the specific branch
+
+      - name: Create docs-branch if it does not exist
+        run: |
+          cd destination-repo
+          git fetch origin
+          if git show-ref --verify --quiet refs/heads/docs-branch; then
+            git checkout docs-branch
+            git pull origin docs-branch
+          else
+            git checkout -b docs-branch
 
       # Step 3: Copy the docs from source to destination
       - name: Copy Documentation
@@ -41,7 +50,8 @@ jobs:
           # git clone $DESTINATION_REPO destination-repo
 
           # Copy the specific directory to the destination repo
-          cp -r source-repo/$SOURCE_DIR destination-repo/$DESTINATION_DIR
+          # cp -r source-repo/$SOURCE_DIR destination-repo/$DESTINATION_DIR
+          rsync -av --delete source-repo/$SOURCE_DIR destination-repo/$DESTINATION_DIR
           echo "Documentation copied to destination repository..."
 
       # Step 4: Commit and push changes to the destination repository
