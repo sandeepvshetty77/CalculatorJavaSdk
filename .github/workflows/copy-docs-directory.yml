@@ -13,15 +13,17 @@ jobs:
 
     steps:
       - name: Checkout source repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           repository: sandeepvshetty77/CalculatorJavaSDK
           path: source-repo
 
         # Step 2: Checkout the Destination Repository
       - name: Checkout Destination Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           repository: sandeepvshetty77/CalculatorJavaSDK_Destination
           path: destination-repo
           token: ${{ secrets.DESTINATION_REPO_TOKEN }} # Using the built-in token
