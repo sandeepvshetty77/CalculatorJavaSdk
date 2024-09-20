@@ -50,6 +50,10 @@ jobs:
 
           # Copy the specific directory to the destination repo
           # cp -r source-repo/$SOURCE_DIR destination-repo/$DESTINATION_DIR
+          echo "Source directory: source-repo/$SOURCE_DIR"
+          echo "Source directory 1:  $(pwd)/source-repo/$SOURCE_DIR"
+          echo "Destination directory: $(pwd)/destination-repo/$DESTINATION_DIR"
+          echo "Destination directory 1: /destination-repo/$DESTINATION_DIR"
           rsync -av --delete source-repo/$SOURCE_DIR destination-repo/$DESTINATION_DIR
           echo "Documentation copied to destination repository..."
 
