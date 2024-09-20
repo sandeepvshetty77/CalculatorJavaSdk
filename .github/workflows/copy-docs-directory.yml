@@ -35,7 +35,7 @@ jobs:
           # Define the source and destination directories
           SOURCE_DIR="CalculatorSDK/docs"
           DESTINATION_REPO="https://github.com/sandeepvshetty77/CalculatorJavaSDK_Destination.git"
-          DESTINATION_DIR="JavaSDK/docs"
+          DESTINATION_DIR="CalculatorSDK/docs"
 
           # Clone the destination repository
           # git clone $DESTINATION_REPO destination-repo
