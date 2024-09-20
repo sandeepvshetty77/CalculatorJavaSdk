@@ -80,17 +80,15 @@ jobs:
       - name: Copy Documentation
         run: |
           # Define the source and destination directories
-          SOURCE_DIR="docs"
+          SOURCE_DIR="source-repo/docs"
           DESTINATION_REPO="https://github.com/sandeepvshetty77/CalculatorJavaSDK_Destination.git"
-          DESTINATION_DIR="docs"
+          DESTINATION_DIR="destination-repo/docs"
 
           # Copy the specific directory to the destination repo
           # cp -r source-repo/$SOURCE_DIR/* destination-repo/$DESTINATION_DIR/*
-          echo "Source directory: source-repo/$SOURCE_DIR"
-          echo "Source directory 1:  $(pwd)/source-repo/$SOURCE_DIR"
-          echo "Destination directory: $(pwd)/destination-repo/$DESTINATION_DIR"
-          echo "Destination directory 1: /destination-repo/$DESTINATION_DIR"
-          rsync -av --delete source-repo/$SOURCE_DIR/* destination-repo/$DESTINATION_DIR/*
+          echo "Source directory:  $(pwd)/$SOURCE_DIR"
+          echo "Destination directory: $(pwd)/$DESTINATION_DIR"
+          rsync -av --delete $SOURCE_DIR/ $DESTINATION_DIR/
           echo "Documentation copied to destination repository..."
 
       # Step 4: Commit and push changes to the destination repository
