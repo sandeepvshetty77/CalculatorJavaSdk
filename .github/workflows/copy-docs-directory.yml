@@ -37,6 +37,7 @@ jobs:
             git pull origin docs-branch
           else
             git checkout -b docs-branch
+          fi
 
       # Step 3: Copy the docs from source to destination
       - name: Copy Documentation
