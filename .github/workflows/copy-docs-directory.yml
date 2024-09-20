@@ -42,7 +42,7 @@ jobs:
 
           # Copy the specific directory to the destination repo
           cp -r source-repo/$SOURCE_DIR destination-repo/$DESTINATION_DIR
-          echo "Documentation copied to destination repository.."
+          echo "Documentation copied to destination repository..."
 
       # Step 4: Commit and push changes to the destination repository
       - name: Commit and Push Changes
