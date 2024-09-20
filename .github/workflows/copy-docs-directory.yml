@@ -45,6 +45,7 @@ jobs:
 
       - name: Commit and Push Javadoc
         run: |
+          cd source-repo
           git add .
           git commit -m "Update Javadoc1"
           git push origin main
