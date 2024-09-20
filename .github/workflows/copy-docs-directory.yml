@@ -50,7 +50,7 @@ jobs:
           git config --global user.name "GitHub Actions Bot"  # Set a name
           git add .
           git commit -m "Update Javadoc1"
-          git push origin main
+          git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
