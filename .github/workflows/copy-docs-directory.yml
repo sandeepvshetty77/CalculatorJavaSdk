@@ -63,6 +63,6 @@ jobs:
           git config --global user.email "your-email@example.com"  # Set your email
           git config --global user.name "GitHub Actions Bot"  # Set a name
           git checkout -b docs-branch || git checkout docs-branch  # Create branch if it doesn't exist
-          git add ./docs
+          git add /docs
           git commit -m "Update documentation from CalculatorSDK"
           git push origin docs-branch  # Push to the specific branch
