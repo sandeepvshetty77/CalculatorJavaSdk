@@ -1,9 +1,11 @@
 name: Copy Directory to Another Repo
 
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches:
-      - main # Trigger on push to main branch, adjust as needed
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
 
 jobs:
   copy:
