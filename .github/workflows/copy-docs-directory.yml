@@ -11,6 +11,17 @@ jobs:
   copy:
     runs-on: ubuntu-latest
 
+    env:
+      # Variables for paths and repository configuration
+      SOURCE_REPO: "sandeepvshetty77/CalculatorJavaSDK"
+      SOURCE_REPO_PATH: "source-repo"
+      SOURCE_JAVA_FILES_PATH: "source-repo/CalculatorSDK/src/*.java"
+      DOCS_OUTPUT_PATH: "source-repo/docs"
+      DESTINATION_REPO: "sandeepvshetty77/CalculatorJavaSDK_Destination"
+      DESTINATION_REPO_PATH: "destination-repo"
+      DESTINATION_DOCS_PATH: "destination-repo/docs"
+      BRANCH_NAME: "docs-branch"  # Configurable branch name for the destination repo
+
     steps:
       - name: Set up JDK 11
         uses: actions/setup-java@v4.3.0
@@ -22,18 +33,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          repository: sandeepvshetty77/CalculatorJavaSDK
-          path: source-repo
+          repository: ${{ env.SOURCE_REPO }}
+          path: ${{ env.SOURCE_REPO_PATH }}
           
       - name: Generate Documentation
         run: |
-          mkdir -p source-repo/docs
-          javadoc -sourcepath source-repo/CalculatorSDK/src/*.java -d  source-repo/docs
-          ls -lrta source-repo/docs
+          mkdir -p ${{ env.DOCS_OUTPUT_PATH }}
+          javadoc -sourcepath ${{ env.SOURCE_JAVA_FILES_PATH }} -d ${{ env.DOCS_OUTPUT_PATH }}
+          ls -lrta ${{ env.DOCS_OUTPUT_PATH }}
 
       - name: Commit and Push documentation to same branch
         run: |
-          cd source-repo
+          cd ${{ env.SOURCE_REPO_PATH }}
           git pull
           git config --global user.email "your-email@example.com"  # Set your email
           git config --global user.name "GitHub Actions Bot"  # Set a name
@@ -48,44 +59,37 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          repository: sandeepvshetty77/CalculatorJavaSDK_Destination
-          path: destination-repo
+          repository: ${{ env.DESTINATION_REPO }}
+          path: ${{ env.DESTINATION_REPO_PATH }}
           token: ${{ secrets.DESTINATION_REPO_TOKEN }} # Using the built-in token
 
       - name: Create docs-branch if it does not exist
         run: |
-          cd destination-repo
+          cd${{ env.DESTINATION_REPO_PATH }}
           git fetch origin
-          if git show-ref --verify --quiet refs/heads/docs-branch; then
-            git checkout docs-branch
-            git pull origin docs-branch
+          if git show-ref --verify --quiet refs/heads/${{ env.BRANCH_NAME }}; then
+            git checkout ${{ env.BRANCH_NAME }}
+            git pull origin ${{ env.BRANCH_NAME }}
           else
-            git checkout -b docs-branch
-            git pull origin docs-branch
+            git checkout -b ${{ env.BRANCH_NAME }}
+            git pull origin ${{ env.BRANCH_NAME }}
           fi
 
       # Step 3: Copy the docs from source to destination
       - name: Copy Documentation from Source to Destination repo
         run: |
-          # Define the source and destination directories
-          SOURCE_DIR="source-repo/docs"
-          DESTINATION_REPO="https://github.com/sandeepvshetty77/CalculatorJavaSDK_Destination.git"
-          DESTINATION_DIR="destination-repo/docs"
-
           # Copy the specific directory to the destination repo
-          # cp -r source-repo/$SOURCE_DIR/* destination-repo/$DESTINATION_DIR/*
-          echo "Source directory:  $(pwd)/$SOURCE_DIR"
-          echo "Destination directory: $(pwd)/$DESTINATION_DIR"
-          rsync -av --delete $SOURCE_DIR/ $DESTINATION_DIR/
+          echo "Source directory:  $(pwd)/${{ env.DOCS_OUTPUT_PATH }}"
+          echo "Destination directory: $(pwd)/${{ env.DESTINATION_DOCS_PATH }}"
+          rsync -av --delete ${{ env.DOCS_OUTPUT_PATH }}/ ${{ env.DESTINATION_DOCS_PATH }}/
           echo "Documentation copied to destination repository..."
 
       # Step 4: Commit and push changes to the destination repository
       - name: Commit and Push Changes to Destination repo
         run: |
-          cd destination-repo
+          cd ${{ env.DESTINATION_REPO_PATH }}
           git config --global user.email "your-email@example.com"  # Set your email
           git config --global user.name "GitHub Actions Bot"  # Set a name
-          git checkout -b docs-branch || git checkout docs-branch  # Create branch if it doesn't exist
           git add .
-          git commit -m "Update documentation from CalculatorSDK"
-          git push origin docs-branch  # Push to the specific branch
+          git commit -m "Update documentation from Source repoistory on  $(date '+%Y-%m-%d')"
+          git push origin ${{ env.BRANCH_NAME }}  # Push to the configurable branch
