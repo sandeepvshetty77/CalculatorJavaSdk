@@ -79,6 +79,13 @@ public class CalculatorAPI {
         return Double.parseDouble(response);
     }
 
+    /**
+     * Divides the second number from the first using the Calculator API.
+     *
+     * @param a The first number.
+     * @param b The second number.
+     * @return The divisor
+     */
     public double divide(double a, double b) throws IOException {
         String response = makeRequest("divide", a, b);
         if (b == 0) {
