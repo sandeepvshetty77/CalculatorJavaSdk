@@ -81,6 +81,7 @@ jobs:
           # Copy the specific directory to the destination repo
           echo "Source directory:  $(pwd)/${{ env.DOCS_OUTPUT_PATH }}"
           echo "Destination directory: $(pwd)/${{ env.DESTINATION_DOCS_PATH }}"
+          mkdir -p $(pwd)/${{ env.DESTINATION_DOCS_PATH }}
           rsync -av --delete ${{ env.DOCS_OUTPUT_PATH }}/ ${{ env.DESTINATION_DOCS_PATH }}/
           echo "Documentation copied to destination repository..."
 
