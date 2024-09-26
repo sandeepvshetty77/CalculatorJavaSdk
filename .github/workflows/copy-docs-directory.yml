@@ -24,33 +24,21 @@ jobs:
           fetch-depth: 0
           repository: sandeepvshetty77/CalculatorJavaSDK
           path: source-repo
-
-      - name: Print current directory
-        run: pwd
-
-      - name: List all files and directories
-        run: ls -lrta
-
-      - name: Print current working directory
-        run: echo "Current working directory:$GITHUB_WORKSPACE"
-
-      - name: List files and directories
-        run: ls -la $GITHUB_WORKSPACE
-
-      - name: Generate Javadoc
+          
+      - name: Generate Documentation
         run: |
           mkdir -p source-repo/docs
           javadoc -sourcepath source-repo/CalculatorSDK/src/*.java -d  source-repo/docs
           ls -lrta source-repo/docs
 
-      - name: Commit and Push Javadoc
+      - name: Commit and Push documentation to same branch
         run: |
           cd source-repo
           git pull
           git config --global user.email "your-email@example.com"  # Set your email
           git config --global user.name "GitHub Actions Bot"  # Set a name
           git add .
-          git commit -m "Update Javadoc1"
+          git commit -m "Update documentation on $(date '+%Y-%m-%d')"
           git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -77,7 +65,7 @@ jobs:
           fi
 
       # Step 3: Copy the docs from source to destination
-      - name: Copy Documentation
+      - name: Copy Documentation from Source to Destination repo
         run: |
           # Define the source and destination directories
           SOURCE_DIR="source-repo/docs"
@@ -92,7 +80,7 @@ jobs:
           echo "Documentation copied to destination repository..."
 
       # Step 4: Commit and push changes to the destination repository
-      - name: Commit and Push Changes
+      - name: Commit and Push Changes to Destination repo
         run: |
           cd destination-repo
           git config --global user.email "your-email@example.com"  # Set your email
